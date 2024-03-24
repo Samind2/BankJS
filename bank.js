@@ -302,10 +302,6 @@ const main = () => {
 
   const account = customer.createAccount(bank, 5000);
 
-  // เพิ่มบัญชีให้กับลูกค้า
-  customer.createAccount(bank, "ออมทรัพย์", 500);
-  
-
   // ถอนเงินที่ ATM
   const atm = bank.createAtm();
 

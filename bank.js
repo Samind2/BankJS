@@ -356,11 +356,11 @@ const main = () => {
   console.log(`ยอดเงินคงเหลือ: ${account.getBalance()}`);
 
   //ปิดบัญชี
-  const closed = bank.closeAccount(account.accountNumber, account.getBalance());
-  if (closed) {
-    console.log(`บัญชีเลขที่ ${account.accountNumber} ถูกปิดเรียบร้อยแล้ว`);
-  } else {
-    console.log(`ไม่สามารถปิดบัญชีเลขที่ ${account.accountNumber} ได้`);
-  }
+ // const closed = bank.closeAccount(account.accountNumber, account.getBalance());
+  //if (closed) {
+  //  console.log(`บัญชีเลขที่ ${account.accountNumber} ถูกปิดเรียบร้อยแล้ว`);
+//  } else {
+ //  console.log(`ไม่สามารถปิดบัญชีเลขที่ ${account.accountNumber} ได้`);
+ // }
 };
 main();

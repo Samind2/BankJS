@@ -155,6 +155,9 @@ class Bank {
     );
     return transaction;
   }
+  openAccount(){
+    return Account.openAccount(this.createAccount());
+  }
   //ปิดบัญชี
   closeAccount(accountNumber, balance) {
     const accountIndex = this.accounts.findIndex(
@@ -274,6 +277,10 @@ class Transaction {
   setTransactionDate(transactionDate) {
     this.transactionDate = transactionDate;
   }
+//ตรวจสอบสถานะ
+  checkStatus() {
+    return this.status;
+  }
 }
 
 //บัญชีกระแสรายวัน
@@ -334,7 +341,7 @@ const main = () => {
   const customer = bank.createCustomer();
 
   // สร้างบัชชีลูกค้า
-  const account = customer.createAccount(bank, 5000);
+  const account = customer.createAccount(bank, 200);
 
   // ถอนเงินที่ ATM
   const atm = bank.createAtm();
@@ -359,10 +366,17 @@ const main = () => {
   console.log(
     `ถอนเงินผ่าน ATM จากบัญชี: ${account.accountNumber} จำนวน: ${atm.withdraw(
       account,
-      10550
+      550
     )}`
   );
   console.log(`ยอดเงินคงเหลือ: ${account.getBalance()}`);
+
+  //เช็คสถานะ
+  //ในการเรียกใช้เมธอด checkStatus() ในคลาส Transaction จากอ็อบเจกต์ transaction ภายในฟังก์ชัน main() ของคุณ 
+  //เราต้องเรียกใช้งาน createTransaction() จากอ็อบเจกต์ของธนาคาร (bank) และไม่จำเป็นต้องส่งพารามิเตอร์ customer เข้าไป เนื่องจากฟังก์ชัน createTransaction() 
+  //ไม่ต้องการพารามิเตอร์นี้ ดังนั้นเราจะต้องแก้ไขการเรียกใช้งานฟังก์ชัน createTransaction() ในฟังก์ชัน 
+  const transaction = bank.createTransaction("258759", "ฝากเงิน", 1000, "25/3/2567", "เสร็จสิ้น");
+  console.log(`สถานะของธุรกรรม: ${transaction.checkStatus()} `);
 
   //ปิดบัญชี
 const closed = bank.closeAccount(account.accountNumber, account.getBalance());
